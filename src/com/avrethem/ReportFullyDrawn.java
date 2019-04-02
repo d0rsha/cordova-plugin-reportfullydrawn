@@ -26,7 +26,7 @@ public class ReportFullyDrawn extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("ReportFullyDrawn")) {
+        if (action.equals("reportFullyDrawn")) {
             Log.d(TAG, "execute() reportFullyDrawn");
 
             try {

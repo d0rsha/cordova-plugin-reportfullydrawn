@@ -10,7 +10,7 @@
     <engines>
         <engine name="cordova" version=">=3.2.0" />
     </engines>
-    <js-module name="ReportFullyDrawnPlugin" src="www/ReportFullyDrawnPlugin.js">
+    <js-module name="ReportFullyDrawn" src="www/ReportFullyDrawnPlugin.js">
         <clobbers target="cordova.ReportFullyDrawnPlugin" />
     </js-module>
 
@@ -20,7 +20,7 @@
 	    <hook type="before_plugin_uninstall" src="scripts/android/before_plugin_uninstall.js" /> -->
 
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="ReportFullyDrawnPlugin">
+            <feature name="ReportFullyDrawn">
                 <param name="android-package" value="com.avrethem.reportfullydrawn"></param>
                 <param name="onload" value="true"></param>
             </feature>
