@@ -1,0 +1,27 @@
+{
+  "name": "reportfullydrawn-plugin",
+  "version": "1.0.0",
+  "description": "A plugin for reporting to the native device that the app has loaded fully \"",
+  "main": "www/ReportFullyDrawn.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anders Vrethem",
+  "license": "MIT",
+  "cordova": {
+    "id": "cordova-plugin-reportfullydrawn",
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {},
+  "homepage": "https://github.com/d0rsha/cordova-plugin-reportfullydrawn#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arnesson/cordova-plugin-firebase.git"
+  }
+}

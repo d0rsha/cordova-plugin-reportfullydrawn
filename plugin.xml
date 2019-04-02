@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.avrethem.reportfullydrawn" version="true" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>ReportFullyDrawnPlugin</name>
+    <description>
+		My first cordova plugin
+	</description>
+    <license>
+		MIT
+	</license>
+    <engines>
+        <engine name="cordova" version=">=3.2.0" />
+    </engines>
+    <js-module name="ReportFullyDrawnPlugin" src="www/ReportFullyDrawnPlugin.js">
+        <clobbers target="cordova.ReportFullyDrawnPlugin" />
+    </js-module>
+
+    <!-- Android -->
+    <platform name="Android">
+        <!-- <hook type="after_plugin_install" src="scripts/android/after_plugin_install.js" />
+	    <hook type="before_plugin_uninstall" src="scripts/android/before_plugin_uninstall.js" /> -->
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ReportFullyDrawnPlugin">
+                <param name="android-package" value="com.avrethem.reportfullydrawn"></param>
+                <param name="onload" value="true"></param>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/ReportFullyDrawn.java" target-dir="src/org/apache/cordova/reportfullydrawn"></source-file>
+    </platform>
+</plugin>
+
