@@ -8,5 +8,5 @@ exports.coolMethod = function (arg0, success, error) {
 
 
 exports.reportFullyDrawn = function(success, error) {
-    exec(success, error, 'ReportFullyDrawn', "reportFullyDrawn", []);
-  }
+    exec(success, error, 'ReportFullyDrawn', 'report', []);
+}

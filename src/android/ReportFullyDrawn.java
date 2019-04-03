@@ -21,28 +21,30 @@ public class ReportFullyDrawn extends CordovaPlugin {
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        Log.d(TAG, "Starting ReportFullyDrawn Plugin");
+        Log.d(TAG, "Initialize ReportFullyDrawn Plugin");
     }
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("reportFullyDrawn")) {
-            Log.d(TAG, "execute() reportFullyDrawn");
+        if (action.equals("report")) {
+            Log.d(TAG, "execute() report");
 
             try {
                 // Report fully drawn 
                 this.cordova.getActivity().reportFullyDrawn();
-                 Log.d(TAG, "reportFullyDrawn() executed successfully");
+                 Log.d(TAG, "report() executed successfully");
             } catch (Exception e){
                 Log.d(TAG, e);
                 Log.d(TAG, e.message);
-                Log.d(TAG, "execute() reportFullyDrawn", "just ", "for ", "test");
+                Log.d(TAG, "execute() report", "just ", "for ", "test");
             }
             
 
         
+        } else if (action.equals("coolMethod") {
+            Log.d(TAG, "execute() coolMethod");
         } else {
-            Log.d(TAG, "execute() no correct parameters")
+            Log.d(TAG, "execute() no correct parameters");
         }
     }
 
