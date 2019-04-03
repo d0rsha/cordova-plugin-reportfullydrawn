@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-reportfullydrawn",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A plugin for reporting to the native device that the app has loaded fully \"",
   "main": "www/ReportFullyDrawn.js",
   "scripts": {
