@@ -38,14 +38,14 @@ public class ReportFullyDrawn extends CordovaPlugin {
                 Log.d(TAG, e.message);
                 Log.d(TAG, "execute() report", "just ", "for ", "test");
             }
-            
-
-        
         } else if (action.equals("coolMethod") {
             Log.d(TAG, "execute() coolMethod");
-        } else {
-            Log.d(TAG, "execute() no correct parameters");
-        }
+            return true;
+        } 
+
+
+        Log.d(TAG, "execute() no correct parameters");
+        return false;
     }
 
 }
