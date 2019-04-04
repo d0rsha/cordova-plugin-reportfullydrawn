@@ -72,10 +72,10 @@ public class ReportFullyDrawn extends CordovaPlugin {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 try {
-                    Log.d(Tag, "TRY ");
+                    Log.d(TAG, "TRY ");
                     Log.d(TAG, "coolMethod()");
                     callbackContext.success("coolMethod() done");
-                    Log.d(myTag, "callbackContext.success();");
+                    Log.d(TAG, "callbackContext.success();");
                 } catch (Exception e) {
                     callbackContext.error(e.getMessage());
                 }
@@ -83,15 +83,15 @@ public class ReportFullyDrawn extends CordovaPlugin {
         });
     }
 
-    private void echo(final CallbackContext callbackContext, final String echo) {
+    private void echo(final CallbackContext callbackContext, final String echoCall) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 try {
-                    Log.d(Tag, "TRY ");
+                    Log.d(TAG, "TRY ");
                     Log.d(TAG, "echo()");
-                    Log.d(TAG, echo);
+                    Log.d(TAG, echoCall);
                     callbackContext.success(echo);
-                    Log.d(myTag, "callbackContext.success();");
+                    Log.d(TAG, "callbackContext.success();");
                 } catch (Exception e) {
                     callbackContext.error(e.getMessage());
                 }
