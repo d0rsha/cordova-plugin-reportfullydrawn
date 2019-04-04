@@ -1,32 +1,27 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-reportfullydrawn" version="1.0.2" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>ReportFullyDrawnPlugin</name>
-    <description>
-		My first cordova plugin
-	</description>
-    <license>
-		MIT
-	</license>
+<plugin id="cordova-plugin-reportfullydrawn" version="2.0.5" 
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Report Fully Drawn Plugin</name>
+
+    <license>MIT</license>
+
     <engines>
         <engine name="cordova" version=">=3.2.0" />
     </engines>
-    <js-module name="ReportFullyDrawn" src="www/ReportFullyDrawnPlugin.js">
-        <clobbers target="cordova.ReportFullyDrawnPlugin" />
-    </js-module>
 
-    <!-- Android -->
-    <platform name="Android">
-        <!-- <hook type="after_plugin_install" src="scripts/android/after_plugin_install.js" />
-	    <hook type="before_plugin_uninstall" src="scripts/android/before_plugin_uninstall.js" /> -->
+    <platform name="android">
 
-        <config-file target="res/xml/config.xml" parent="/*">
+        <js-module name="ReportFullyDrawn" src="www/ReportFullyDrawn.js">
+            <clobbers target="ReportFullyDrawn" />
+        </js-module>
+        <config-file parent="/*" target="res/xml/config.xml">
             <feature name="ReportFullyDrawn">
-                <param name="android-package" value="cordova-plugin-reportfullydrawn"></param>
-                <param name="onload" value="true"></param>
+                <param name="android-package" value="org.apache.cordova.reportfullydrawn.ReportFullyDrawn" />
+                <param name="onload" value="true" />
             </feature>
         </config-file>
 
-        <source-file src="src/android/ReportFullyDrawn.java" target-dir="src/org/apache/cordova/reportfullydrawn"></source-file>
+        <source-file src="src/android/ReportFullyDrawn.java" target-dir="src/org/apache/cordova/reportfullydrawn" />
     </platform>
 </plugin>
-
