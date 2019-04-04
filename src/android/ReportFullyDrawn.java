@@ -90,7 +90,7 @@ public class ReportFullyDrawn extends CordovaPlugin {
                     Log.d(TAG, "TRY ");
                     Log.d(TAG, "echo()");
                     Log.d(TAG, echoCall);
-                    callbackContext.success(echo);
+                    callbackContext.success(echoCall);
                     Log.d(TAG, "callbackContext.success();");
                 } catch (Exception e) {
                     callbackContext.error(e.getMessage());
