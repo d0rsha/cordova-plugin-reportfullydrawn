@@ -1,3 +1,14 @@
+package org.apache.cordova.avrethem;
+
+import android.app.NotificationManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
@@ -12,54 +23,47 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-
 public class ReportFullyDrawn extends CordovaPlugin {
-    private static final String TAG = "ReportFullyDrawnTag";
 
+    private final String TAG = "ReportFullyDrawnPlugin";
 
-    /* // ngOnInit() { ... } 
-    @Override
-    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        super.initialize(cordova, webView);
-        Log.d(TAG, "Initialize ReportFullyDrawn Plugin");
-    } */
+    /*
+    *   Initialize necccessary things before execute call 
+    *       Not necescary toi implement 
+    */
     @Override
     protected void pluginInitialize() {
-        Log.d(TAG, "Starting ReportFullyDrawn Plugin");
-    }        
+        this.cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                Log.d(TAG, "Starting ReportFullyDrawn plugin");
+            }
+        });
+    }
 
+    /*
+    *   Execute is called from cordova API 
+    *
+    *   @param  action 
+    *   @param  args
+    *   @param  callbackContext 
+    */
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        Log.d(TAG, "run execute()");
-        if (action.equals("report")) {
-            this.report(callbackContext);
-            return true;
-        } else if (action.equals("coolMethod")) {
-            this.coolMethod(callbackContext);
-            return true;
-        } else if (action.equals("echo")) {
-            this.echo(callbackContext, echo);
+        if (action.equals("reportFullyDrawn")) {
+            Log.d(TAG, "reportFullyDrawn() called");
+            this.reportFullyDrawn(callbackContext);
             return true;
         } 
 
-        Log.d(TAG, "execute() FAILED");
         return false;
     }
 
 
-
-    private void report(final CallbackContext callbackContext) {
+    private void reportFullyDrawn(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                try {
-                    Log.d(Tag, "TRY ");
-                    Log.d(TAG, "report()");
-                    String res = cordova.getActivity().reportFullyDrawn();
-                    callbackContext.success(res);
-                    Log.d(myTag, "callbackContext.success();");
-                } catch (Exception e) {
-                    callbackContext.error(e.getMessage());
-                }
+                Log.d(TAG, "cordova.getActivity().reportFullyDrawn() called");
+                cordova.getActivity().reportFullyDrawn();
             }
         });
     }
