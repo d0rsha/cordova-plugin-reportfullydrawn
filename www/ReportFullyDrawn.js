@@ -7,7 +7,7 @@ exports.reportFullyDrawn = function(success, error) {
 };
 
 exports.printInfo = function(success, error) {
-  exec(success, error, "ReportFullyDrawn", "pintInfo", []);
+  exec(success, error, "ReportFullyDrawn", "printInfo", []);
 }
 
 exports.coolMethod = function (arg0, success, error) {
