@@ -68,6 +68,46 @@ public class ReportFullyDrawn extends CordovaPlugin {
         });
     }
 
+    private void printInfo(final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                //
+                //  Print info about the system
+                //
+                Log.d(TAG, "cordova.getActivity().printInfo() called");
+                String deviceInfo = "device: Device {";
+                deviceInfo += "approach:native,";
+                deviceInfo += "version:" + Build.VERSION.RELEASE + ",";
+                deviceInfo += "manufacturer:" + Build.MANUFACTURER + ",";
+                deviceInfo += "model:" + android.os.Build.MODEL + ",";
+                deviceInfo += "platform:android,";
+                // Always ask for permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this.checkPermission
+                        (this.PHONE_STATE_PERMISSION, this)) {
+                    deviceInfo += "serial:" + Build.getSerial() + ",";
+
+                } else {
+                    deviceInfo += "serial:"+ Build.SERIAL + ",";
+                }
+                deviceInfo += "android-api:" + android.os.Build.VERSION.SDK_INT + ",";
+                deviceInfo += "product:" + android.os.Build.PRODUCT + ",";
+                deviceInfo += "isVirtual:" + isEmulator() + ",";
+
+
+                // Extra info 
+                deviceInfo += "device:" + android.os.Build.DEVICE + ",";
+                deviceInfo += "product:" + android.os.Build.PRODUCT + ",";
+                deviceInfo += "bootloader:" + android.os.Build.BOOTLOADER + ",";
+                deviceInfo += "os:" + System.getProperty("os.version") + ",";
+                deviceInfo += "bootloader:" + android.os.Build.ID + ",";
+
+
+                Log.d(TAG, deviceInfo);
+            }
+        });
+    }
+
+
     private void coolMethod(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
@@ -97,5 +137,36 @@ public class ReportFullyDrawn extends CordovaPlugin {
                 }
             }
         });
+    }
+
+
+    /*
+    *   Helper function
+    *
+    */
+    public static String isEmulator() {
+        if (Build.FINGERPRINT.startsWith("generic")
+                || Build.FINGERPRINT.startsWith("unknown")
+                || Build.MODEL.contains("google_sdk")
+                || Build.MODEL.contains("Emulator")
+                || Build.MODEL.contains("Android SDK built for x86")
+                || Build.MANUFACTURER.contains("Genymotion")
+                || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
+                || "google_sdk".equals(Build.PRODUCT))
+            return "true";
+        else
+            return "false";
+    }
+
+    /*
+    *  Helper function
+    *
+    */
+    public static final String PHONE_STATE_PERMISSION =
+            Manifest.permission.READ_PHONE_STATE;
+
+    public static boolean checkPermission(String permission, Activity activity) {
+        return ContextCompat.checkSelfPermission(activity, permission) ==
+                PackageManager.PERMISSION_GRANTED;
     }
 }

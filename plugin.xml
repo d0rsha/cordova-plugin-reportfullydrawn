@@ -21,6 +21,10 @@
                 <param name="onload" value="true" />
             </feature>
         </config-file>
+        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/uses-permission" xmlns:android="http://schemas.android.com/apk/res/android">
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+            <uses-permission android:name="android.permission.INTERNET"/>
+        </edit-config>
 
         <source-file src="src/android/ReportFullyDrawn.java" target-dir="src/org/apache/cordova/avrethem" />
     </platform>
