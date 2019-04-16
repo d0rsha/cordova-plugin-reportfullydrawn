@@ -33,14 +33,23 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.provider.Settings;
+
 
 public class ReportFullyDrawn extends CordovaPlugin {
 
     private final String TAG = "ReportFullyDrawnPlugin";
 
+    /**
+     * Constructor.
+     */
+    public ReportFullyDrawn() {
+    }
+
+
     /*
     *   Initialize necccessary things before execute call 
-    *       Not necescary toi implement 
+    *       Not necescary to implement 
     */
     @Override
     protected void pluginInitialize() {
@@ -53,10 +62,13 @@ public class ReportFullyDrawn extends CordovaPlugin {
 
     /*
     *   Execute is called from cordova API 
+    * 
+    *   Connects local functions to Cordova execute() calls 
     *
-    *   @param  action 
-    *   @param  args
-    *   @param  callbackContext 
+    * @param action            The action to execute.
+    * @param args              JSONArry of arguments for the plugin.
+    * @param callbackContext   The callback id used when calling back into JavaScript.
+    * @return                  True if the action was valid, false if not.
     */
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -64,12 +76,33 @@ public class ReportFullyDrawn extends CordovaPlugin {
             Log.d(TAG, "reportFullyDrawn() called");
             this.reportFullyDrawn(callbackContext);
             return true;
-        } 
+        }else if (action.equals("printInfo")) {
+            Log.d(TAG, "printInfo() called");
+            this.printInfo(callbackContext);
+            return true;
+        } else if (action.equals("echo")) {
+            Log.d(TAG, "echo() called");
+            this.echo(callbackContext, args.getString(0));
+            return true;
+        } else if (action.equals("coolMethod")) {
+            Log.d(TAG, "coolMethod() called");
+            this.coolMethod(callbackContext);
+            return true;
+        }
 
         return false;
     }
 
 
+
+
+    //--------------------------------------------------------------------------
+    // NATIVE DEVICE CODE 
+    //--------------------------------------------------------------------------
+
+    /*
+     *   Report application to be fully responsive and fully drawn 
+     */
     private void reportFullyDrawn(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
@@ -79,40 +112,36 @@ public class ReportFullyDrawn extends CordovaPlugin {
         });
     }
 
+    /*
+     * Print info about the system
+     */ 
     private void printInfo(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                //
-                //  Print info about the system
-                //
                 Log.d(TAG, "cordova.getActivity().printInfo() called");
                 String deviceInfo = "device: Device {";
-                deviceInfo += "approach:native,";
+                deviceInfo += "approach:hybrid,";
                 deviceInfo += "version:" + android.os.Build.VERSION.RELEASE + ",";
                 deviceInfo += "manufacturer:" + android.os.Build.MANUFACTURER + ",";
                 deviceInfo += "model:" + android.os.Build.MODEL + ",";
                 deviceInfo += "platform:android,";
                 // Always ask for permission
-                if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    deviceInfo += "serial:" + android.os.Build.getSerial() + ",";
-
-                } else {
-                    deviceInfo += "serial:"+ android.os.Build.SERIAL + ",";
-                }
+                deviceInfo += "serial:"+ android.os.Build.SERIAL + ",";
                 deviceInfo += "android-api:" + android.os.Build.VERSION.SDK_INT + ",";
                 deviceInfo += "product:" + android.os.Build.PRODUCT + ",";
-                deviceInfo += "isVirtual:" + isEmulator() + ",";
-
-
+                deviceInfo += "isVirtual:" + isVirtual() + ",";
+                deviceInfo += "uuid:" + Settings.Secure.getString(cordova.getActivity().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID) + ",";
                 // Extra info 
+                deviceInfo += "osversion:" + System.getProperty("os.version") + ",";
+                deviceInfo += "sdkversion:" + android.os.Build.VERSION.SDK + ",";
                 deviceInfo += "device:" + android.os.Build.DEVICE + ",";
                 deviceInfo += "product:" + android.os.Build.PRODUCT + ",";
                 deviceInfo += "bootloader:" + android.os.Build.BOOTLOADER + ",";
-                deviceInfo += "os:" + System.getProperty("os.version") + ",";
-                deviceInfo += "bootloader:" + android.os.Build.ID + ",";
+                deviceInfo += "id:" + android.os.Build.ID + ",";
 
 
                 Log.d(TAG, deviceInfo);
+                callbackContext.success(deviceInfo);
             }
         });
     }
@@ -152,33 +181,8 @@ public class ReportFullyDrawn extends CordovaPlugin {
 
     /*
     *   Helper function
-    *
     */
-    public static String isEmulator() {
-        if (Build.FINGERPRINT.startsWith("generic")
-                || Build.FINGERPRINT.startsWith("unknown")
-                || Build.MODEL.contains("google_sdk")
-                || Build.MODEL.contains("Emulator")
-                || Build.MODEL.contains("Android SDK built for x86")
-                || Build.MANUFACTURER.contains("Genymotion")
-                || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
-                || "google_sdk".equals(Build.PRODUCT))
-            return "true";
-        else
-            return "false";
+    public boolean isVirtual() {
+        return android.os.Build.FINGERPRINT.contains("generic") || android.os.Build.PRODUCT.contains("sdk");
     }
-
-    /*
-    *  Helper function
-    *
-    */
-/*     public static final String PHONE_STATE_PERMISSION =
-            Manifest.permission.READ_PHONE_STATE;
-
-    public static boolean checkPermission(String permission, Activity activity) {
-        return ContextCompat.checkSelfPermission(activity, permission) ==
-                PackageManager.PERMISSION_GRANTED;
-    } */
 }
-
-//cordova plugin add cordova-plugin-android-support-v4
