@@ -127,17 +127,17 @@ public class ReportFullyDrawn extends CordovaPlugin {
                 deviceInfo += "platform:android,";
                 // Always ask for permission
                 deviceInfo += "serial:"+ android.os.Build.SERIAL + ",";
-                deviceInfo += "android-api:" + android.os.Build.VERSION.SDK_INT + ",";
+                deviceInfo += "sdk-version:" + android.os.Build.VERSION.SDK_INT + ",";
                 deviceInfo += "product:" + android.os.Build.PRODUCT + ",";
                 deviceInfo += "isVirtual:" + isVirtual() + ",";
                 deviceInfo += "uuid:" + Settings.Secure.getString(cordova.getActivity().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID) + ",";
                 // Extra info 
                 deviceInfo += "osversion:" + System.getProperty("os.version") + ",";
-                deviceInfo += "sdkversion:" + android.os.Build.VERSION.SDK + ",";
                 deviceInfo += "device:" + android.os.Build.DEVICE + ",";
                 deviceInfo += "product:" + android.os.Build.PRODUCT + ",";
                 deviceInfo += "bootloader:" + android.os.Build.BOOTLOADER + ",";
                 deviceInfo += "id:" + android.os.Build.ID + ",";
+
 
 
                 Log.d(TAG, deviceInfo);
