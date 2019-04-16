@@ -15,5 +15,8 @@ const callbackError = error => {
 
 this.platform.ready().then(() => {
   window["ReportFullyDrawn"].reportFullyDrawn(callbackSuccess, callbackError);
+  window["ReportFullyDrawn"].printInfo();
 });
+
+
 ```

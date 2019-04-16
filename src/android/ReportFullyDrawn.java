@@ -23,6 +23,22 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+// Android Manifest && PackageManager
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+
 public class ReportFullyDrawn extends CordovaPlugin {
 
     private final String TAG = "ReportFullyDrawnPlugin";
@@ -77,17 +93,17 @@ public class ReportFullyDrawn extends CordovaPlugin {
                 Log.d(TAG, "cordova.getActivity().printInfo() called");
                 String deviceInfo = "device: Device {";
                 deviceInfo += "approach:native,";
-                deviceInfo += "version:" + Build.VERSION.RELEASE + ",";
-                deviceInfo += "manufacturer:" + Build.MANUFACTURER + ",";
+                deviceInfo += "version:" + android.os.Build.VERSION.RELEASE + ",";
+                deviceInfo += "manufacturer:" + android.os.Build.MANUFACTURER + ",";
                 deviceInfo += "model:" + android.os.Build.MODEL + ",";
                 deviceInfo += "platform:android,";
                 // Always ask for permission
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this.checkPermission
-                        (this.PHONE_STATE_PERMISSION, this)) {
-                    deviceInfo += "serial:" + Build.getSerial() + ",";
+                if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O && this.checkPermission
+                        (this.PHONE_STATE_PERMISSION, cordova.getActivity())) {
+                    deviceInfo += "serial:" + android.os.Build.getSerial() + ",";
 
                 } else {
-                    deviceInfo += "serial:"+ Build.SERIAL + ",";
+                    deviceInfo += "serial:"+ android.os.Build.SERIAL + ",";
                 }
                 deviceInfo += "android-api:" + android.os.Build.VERSION.SDK_INT + ",";
                 deviceInfo += "product:" + android.os.Build.PRODUCT + ",";
