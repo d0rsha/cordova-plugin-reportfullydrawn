@@ -93,8 +93,7 @@ public class ReportFullyDrawn extends CordovaPlugin {
                 deviceInfo += "model:" + android.os.Build.MODEL + ",";
                 deviceInfo += "platform:android,";
                 // Always ask for permission
-                if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O && this.checkPermission
-                        (this.PHONE_STATE_PERMISSION, cordova.getActivity())) {
+                if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     deviceInfo += "serial:" + android.os.Build.getSerial() + ",";
 
                 } else {
@@ -173,13 +172,13 @@ public class ReportFullyDrawn extends CordovaPlugin {
     *  Helper function
     *
     */
-    public static final String PHONE_STATE_PERMISSION =
+/*     public static final String PHONE_STATE_PERMISSION =
             Manifest.permission.READ_PHONE_STATE;
 
     public static boolean checkPermission(String permission, Activity activity) {
         return ContextCompat.checkSelfPermission(activity, permission) ==
                 PackageManager.PERMISSION_GRANTED;
-    }
+    } */
 }
 
 //cordova plugin add cordova-plugin-android-support-v4
