@@ -202,14 +202,14 @@ public class ReportFullyDrawn extends CordovaPlugin {
     public String formatMilliSeconds(long durationInMillis) {
         String time = "";
 
-        long millis = durationInMillis % 1000;
-        long second = (durationInMillis / 1000) % 60;
-        long minute = (durationInMillis / (1000 * 60)) % 60;
-        long hour = (durationInMillis / (1000 * 60 * 60)) % 24;
-        if (hour > 0)   {    time += hour + "h";          }
-        if (minute > 0) {    time += minute + "m";        }
-        if (second > 0) {    time += second + "s";        }
-        if (true)       {    time += hour + "ms";         }
+        long mil = durationInMillis % 1000;
+        long sec = (durationInMillis / 1000) % 60;
+        long min = (durationInMillis / (1000 * 60)) % 60;
+        long hou = (durationInMillis / (1000 * 60 * 60)) % 24;
+        if (hou > 0)    {    time += hou + "h";        }
+        if (min > 0)    {    time += min + "m";        }
+        if (sec > 0)    {    time += sec + "s";        }
+        if (true)       {    time += mil + "ms";       }
         return time;
     }
 }
