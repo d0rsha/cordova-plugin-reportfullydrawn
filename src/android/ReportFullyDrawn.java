@@ -35,15 +35,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.provider.Settings;
 
+// Tidskontroll av plugins i Cordova
+import android.os.SystemClock;
+import android.util.TimeUtils;
+
 
 public class ReportFullyDrawn extends CordovaPlugin {
 
     private final String TAG = "ReportFullyDrawnPlugin";
-
+    private long launchTime;
     /**
      * Constructor.
      */
     public ReportFullyDrawn() {
+        launchTime = SystemClock.uptimeMillis();
     }
 
 
@@ -55,7 +60,11 @@ public class ReportFullyDrawn extends CordovaPlugin {
     protected void pluginInitialize() {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                Log.d(TAG, "Starting ReportFullyDrawn plugin");
+                final long thisTime = launchTime - SystemClock.uptimeMillis();
+                final String message =  "Starting ReportFullyDrawn plugin, Initialized after: ";
+                TimeUtils.formatDuration(thisTime, message);
+
+                Log.d(TAG, message);
             }
         });
     }
@@ -106,7 +115,12 @@ public class ReportFullyDrawn extends CordovaPlugin {
     private void reportFullyDrawn(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                Log.d(TAG, "cordova.getActivity().reportFullyDrawn() called");
+                final long thisTime = launchTime - SystemClock.uptimeMillis();
+                final String message =  "cordova.getActivity().reportFullyDrawn() called after: ";
+                TimeUtils.formatDuration(thisTime, message);
+
+
+                Log.d(TAG, message);
                 cordova.getActivity().reportFullyDrawn();
             }
         });
@@ -118,7 +132,11 @@ public class ReportFullyDrawn extends CordovaPlugin {
     private void printInfo(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                Log.d(TAG, "cordova.getActivity().printInfo() called");
+                final long thisTime = launchTime - SystemClock.uptimeMillis();
+                final String message =  "cordova.getActivity().printInfo() called after: ";
+                TimeUtils.formatDuration(thisTime, message);
+                Log.d(TAG, message);
+
                 String deviceInfo = "device: Device {";
                 deviceInfo += "approach:hybrid,";
                 deviceInfo += "version:" + android.os.Build.VERSION.RELEASE + ",";
@@ -137,8 +155,6 @@ public class ReportFullyDrawn extends CordovaPlugin {
                 deviceInfo += "product:" + android.os.Build.PRODUCT + ",";
                 deviceInfo += "bootloader:" + android.os.Build.BOOTLOADER + ",";
                 deviceInfo += "id:" + android.os.Build.ID + ",";
-
-
 
                 Log.d(TAG, deviceInfo);
                 callbackContext.success(deviceInfo);
