@@ -59,7 +59,7 @@ public class ReportFullyDrawn extends CordovaPlugin {
     protected void pluginInitialize() {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                final long thisTime = launchTime - SystemClock.uptimeMillis();
+                final long thisTime = SystemClock.uptimeMillis() - launchTime;
                 final String message =  "Starting ReportFullyDrawn plugin, Initialized after: " + formatMilliSeconds(thisTime);
                 Log.d(TAG, message);
             }
@@ -112,7 +112,7 @@ public class ReportFullyDrawn extends CordovaPlugin {
     private void reportFullyDrawn(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                final long thisTime = launchTime - SystemClock.uptimeMillis();
+                final long thisTime = SystemClock.uptimeMillis() - launchTime;
                 final String message =  "cordova.getActivity().reportFullyDrawn() called after: "+ formatMilliSeconds(thisTime);
 
                 Log.d(TAG, message);
@@ -127,7 +127,7 @@ public class ReportFullyDrawn extends CordovaPlugin {
     private void printInfo(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                final long thisTime = launchTime - SystemClock.uptimeMillis();
+                final long thisTime = SystemClock.uptimeMillis() - launchTime;
                 final String message =  "cordova.getActivity().printInfo() called after: " + formatMilliSeconds(thisTime);
                 Log.d(TAG, message);
 
@@ -200,7 +200,7 @@ public class ReportFullyDrawn extends CordovaPlugin {
     *   Time formatter
     */
     public String formatMilliSeconds(long durationInMillis) {
-        String time = "";
+        String time = (durationInMillis >= 0) ? "+" : "-";
 
         long mil = durationInMillis % 1000;
         long sec = (durationInMillis / 1000) % 60;
