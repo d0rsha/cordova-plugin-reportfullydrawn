@@ -10,11 +10,11 @@ exports.printInfo = function(success, error) {
   exec(success, error, "ReportFullyDrawn", "printInfo", []);
 }
 
-exports.coolMethod = function (arg0, success, error) {
-    exec(success, error, 'ReportFullyDrawn', 'coolMethod', [arg0]);
+exports.coolMethod = function (arg, success, error) {
+    exec(success, error, 'ReportFullyDrawn', 'coolMethod', [arg]);
 };
 
-exports.echo = function(success, error) {
-    exec(success, error, 'ReportFullyDrawn', 'echo', [arg0]);
+exports.echo = function(arg, success, error) {
+    exec(success, error, 'ReportFullyDrawn', 'echo', [arg]);
 }
 

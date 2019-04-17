@@ -37,7 +37,6 @@ import android.provider.Settings;
 
 // Tidskontroll av plugins i Cordova
 import android.os.SystemClock;
-import android.util.TimeUtils;
 
 
 public class ReportFullyDrawn extends CordovaPlugin {
@@ -61,9 +60,7 @@ public class ReportFullyDrawn extends CordovaPlugin {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 final long thisTime = launchTime - SystemClock.uptimeMillis();
-                final String message =  "Starting ReportFullyDrawn plugin, Initialized after: ";
-                TimeUtils.formatDuration(thisTime, message);
-
+                final String message =  "Starting ReportFullyDrawn plugin, Initialized after: " + formatMilliSeconds(thisTime);
                 Log.d(TAG, message);
             }
         });
@@ -116,9 +113,7 @@ public class ReportFullyDrawn extends CordovaPlugin {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 final long thisTime = launchTime - SystemClock.uptimeMillis();
-                final String message =  "cordova.getActivity().reportFullyDrawn() called after: ";
-                TimeUtils.formatDuration(thisTime, message);
-
+                final String message =  "cordova.getActivity().reportFullyDrawn() called after: "+ formatMilliSeconds(thisTime);
 
                 Log.d(TAG, message);
                 cordova.getActivity().reportFullyDrawn();
@@ -133,8 +128,7 @@ public class ReportFullyDrawn extends CordovaPlugin {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 final long thisTime = launchTime - SystemClock.uptimeMillis();
-                final String message =  "cordova.getActivity().printInfo() called after: ";
-                TimeUtils.formatDuration(thisTime, message);
+                final String message =  "cordova.getActivity().printInfo() called after: " + formatMilliSeconds(thisTime);
                 Log.d(TAG, message);
 
                 String deviceInfo = "device: Device {";
@@ -200,5 +194,22 @@ public class ReportFullyDrawn extends CordovaPlugin {
     */
     public boolean isVirtual() {
         return android.os.Build.FINGERPRINT.contains("generic") || android.os.Build.PRODUCT.contains("sdk");
+    }
+
+    /*
+    *   Time formatter
+    */
+    public String formatMilliSeconds(long durationInMillis) {
+        String time = "";
+
+        long millis = durationInMillis % 1000;
+        long second = (durationInMillis / 1000) % 60;
+        long minute = (durationInMillis / (1000 * 60)) % 60;
+        long hour = (durationInMillis / (1000 * 60 * 60)) % 24;
+        if (hour > 0)   {    time += hour + "h";          }
+        if (minute > 0) {    time += minute + "m";        }
+        if (second > 0) {    time += second + "s";        }
+        if (true)       {    time += hour + "ms";         }
+        return time;
     }
 }
