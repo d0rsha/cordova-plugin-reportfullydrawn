@@ -3,8 +3,13 @@
 version 1.1.0.
 Compatible with Android
 
-How to use
+Install
+```bash
+npm i cordova-plugin-reportfullydrawn
+ionic cordova plugin add cordova-plugin-reportfullydrawn
+```
 
+How to use
 ```typescript
 const callbackSuccess = success => {
   console.log(success);
