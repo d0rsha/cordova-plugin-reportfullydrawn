@@ -25,3 +25,4 @@ this.platform.ready().then(() => {
 
 
 ```
+qwe qwe qwe
